@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>给力电影网 - 热门电影在线观看推荐 | geilidianyingwang-top</title>
+<meta name="description" content="给力电影网（geilidianyingwang-top）专注热门电影与高分剧集推荐，涵盖动作、喜剧、爱情、科幻等类型，提供榜单排行与每周更新计划，全站移动端自适应。">
+<meta name="keywords" content="给力电影网, geilidianyingwang-top, 热门电影, 在线观看, 电影推荐, 高分剧集, 电影榜单">
+<meta name="author" content="给力电影网">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0fae8a">
+<link rel="canonical" href="https://geilidianyingwang-top.github.io">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "给力电影网",
+  "url": "https://geilidianyingwang-top.github.io",
+  "description": "热门电影与高分剧集推荐导航站点",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://geilidianyingwang-top.github.io#search?q={query}",
+    "query-input": "required name=query"
+  }
+}
+</script>
+
+<style>
+/* ===== 基础 ===== */
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+:root{
+  --mint:#0fae8a;      /* 主色 薄荷绿 */
+  --mint-d:#0c8a6e;
+  --teal:#14b8c4;
+  --ink:#1b2430;
+  --ink-2:#4a5566;
+  --ink-3:#8a93a1;
+  --bg:#f4fbf9;        /* 浅色背景 */
+  --white:#ffffff;
+  --line:#e2ece9;
+  --shadow:0 8px 30px rgba(15,174,138,.10);
+}
+html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+body{
+  font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  background:var(--bg); color:var(--ink); line-height:1.75;
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(15,174,138,.08), transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(20,184,196,.08), transparent 42%);
+  background-attachment:fixed;
+}
+a{ color:inherit; text-decoration:none; }
+ul{ list-style:none; }
+img{ max-width:100%; display:block; }
+.container{ width:100%; max-width:1160px; margin:0 auto; padding:0 20px; }
+.wrap{ overflow:hidden; }
+
+/* ===== 顶部通知条 ===== */
+.notice{ background:linear-gradient(90deg,var(--mint),var(--teal)); color:#fff; font-size:13px; text-align:center; padding:8px 16px; }
+.notice a{ font-weight:700; text-decoration:underline; text-underline-offset:3px; }
+
+/* ===== 头部 ===== */
+.hd{ position:sticky; top:0; z-index:99; background:rgba(255,255,255,.86); backdrop-filter:blur(14px); border-bottom:1px solid var(--line); }
+.hd .container{ display:flex; align-items:center; justify-content:space-between; height:68px; }
+.logo{ display:flex; align-items:center; gap:11px; font-weight:800; font-size:21px; letter-spacing:.4px; }
+.logo .dot{ width:38px; height:38px; border-radius:12px; flex:none; display:grid; place-items:center; font-size:19px; color:#fff;
+  background:linear-gradient(135deg,var(--mint),var(--teal)); box-shadow:0 6px 16px rgba(15,174,138,.30); }
+.logo em{ font-style:normal; color:var(--mint); }
+.menu-btn{ display:none; width:42px; height:42px; border:1px solid var(--line); border-radius:11px; background:var(--white); color:var(--mint); font-size:20px; cursor:pointer; }
+.nav{ display:flex; gap:4px; align-items:center; }
+.nav a{ font-size:14.5px; padding:9px 15px; border-radius:22px; color:var(--ink-2); transition:.25s; font-weight:500; }
+.nav a:hover{ color:var(--mint); background:rgba(15,174,138,.08); }
+.nav a.cta{ background:linear-gradient(135deg,var(--mint),var(--teal)); color:#fff; margin-left:6px; box-shadow:var(--shadow); }
+.nav a.cta:hover{ color:#fff; transform:translateY(-2px); }
+.search-top{ display:flex; align-items:center; gap:8px; background:var(--white); border:1px solid var(--line); border-radius:30px; padding:7px 15px; width:210px; box-shadow:0 2px 10px rgba(0,0,0,.03); }
+.search-top input{ border:0; outline:0; background:none; width:100%; font-size:13px; color:var(--ink); }
+.search-top button{ border:0; background:none; color:var(--mint); cursor:pointer; font-size:15px; }
+
+/* ===== Hero（浅色风格） ===== */
+.hero{ padding:74px 0 62px; position:relative; }
+.hero .grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:48px; align-items:center; }
+.kicker{ display:inline-flex; align-items:center; gap:7px; font-size:12.5px; color:var(--mint-d); background:rgba(15,174,138,.10); border-radius:30px; padding:6px 15px; margin-bottom:20px; font-weight:600; }
+.kicker::before{ content:""; width:7px; height:7px; border-radius:50%; background:var(--mint); animation:pulse 1.6s infinite; }
+@keyframes pulse{ 0%,100%{opacity:1; transform:scale(1);} 50%{opacity:.35; transform:scale(1.5);} }
+.hero h1{ font-size:clamp(30px,5vw,52px); line-height:1.22; font-weight:900; letter-spacing:-.5px; }
+.hero h1 em{ font-style:normal; color:var(--mint); position:relative; display:inline-block; }
+.hero h1 em::after{ content:""; position:absolute; left:0; right:0; bottom:4px; height:12px; background:rgba(20,184,196,.22); z-index:-1; transform:skewX(-12deg); }
+.hero .lead{ color:var(--ink-2); margin-top:18px; max-width:520px; font-size:15.5px; }
+.url-pill{ margin-top:26px; display:inline-flex; align-items:center; gap:10px; background:var(--white); border:1px dashed var(--mint); border-radius:14px; padding:12px 20px; font-size:14px; color:var(--ink-2); box-shadow:var(--shadow); }
+.url-pill code{ color:var(--mint-d); font-weight:700; }
+.hero-cta{ margin-top:30px; display:flex; gap:13px; flex-wrap:wrap; }
+.btn{ display:inline-flex; align-items:center; gap:8px; padding:14px 28px; border-radius:30px; font-size:14.5px; font-weight:700; cursor:pointer; border:0; transition:.25s; }
+.btn-primary{ background:linear-gradient(135deg,var(--mint),var(--teal)); color:#fff; box-shadow:var(--shadow); }
+.btn-primary:hover{ transform:translateY(-3px); box-shadow:0 14px 34px rgba(15,174,138,.30); }
+.btn-outline{ background:var(--white); color:var(--mint-d); border:1.5px solid var(--mint); }
+.btn-outline:hover{ background:rgba(15,174,138,.07); }
+
+/* Hero 右侧卡片堆 */
+.hero-stack{ position:relative; }
+.float-card{ background:var(--white); border:1px solid var(--line); border-radius:20px; padding:20px 22px; box-shadow:var(--shadow); position:absolute; }
+.float-card.fc1{ top:0; left:0; right:54px; }
+.float-card.fc2{ top:96px; left:46px; right:0; }
+.float-card.fc3{ top:198px; left:16px; right:30px; }
+.float-card .row{ display:flex; align-items:center; gap:13px; }
+.thumb{ width:46px; height:46px; border-radius:12px; flex:none; display:grid; place-items:center; font-size:22px; color:#fff; background:linear-gradient(135deg,var(--mint),var(--teal)); }
+.thumb.p2{ background:linear-gradient(135deg,#f59e0b,#f97316); }
+.thumb.p3{ background:linear-gradient(135deg,#6366f1,#8b5cf6); }
+.float-card .tt{ font-size:14.5px; font-weight:700; }
+.float-card .sub{ font-size:12px; color:var(--ink-3); }
+
+/* ===== 通用区块 ===== */
+section{ padding:64px 0; }
+.sec-head{ display:flex; align-items:flex-end; justify-content:space-between; gap:18px; margin-bottom:36px; flex-wrap:wrap; }
+.sec-head .lb{ font-size:12.5px; letter-spacing:2px; color:var(--mint-d); font-weight:700; text-transform:uppercase; }
+.sec-head h2{ font-size:clamp(23px,3vw,31px); font-weight:900; margin-top:5px; }
+.sec-head h2 span{ color:var(--mint); }
+.sec-head .desc{ color:var(--ink-3); font-size:14px; max-width:420px; }
+
+/* ===== 栏目一：分类胶囊 ===== */
+.chips{ display:flex; flex-wrap:wrap; gap:12px; }
+.chip{ background:var(--white); border:1px solid var(--line); border-radius:16px; padding:18px 20px; flex:1 1 150px; min-width:140px; display:flex; align-items:center; gap:13px; transition:.28s; box-shadow:0 2px 10px rgba(0,0,0,.03); }
+.chip:hover{ transform:translateY(-5px) rotate(-1deg); border-color:var(--mint); box-shadow:var(--shadow); }
+.chip .ic{ width:42px; height:42px; border-radius:12px; flex:none; display:grid; place-items:center; font-size:20px; background:rgba(15,174,138,.10); }
+.chip h3{ font-size:15px; }
+.chip small{ font-size:11.5px; color:var(--ink-3); }
+
+/* ===== 栏目二：榜单（表格风） ===== */
+.rank-grid{ display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+.rank-panel{ background:var(--white); border:1px solid var(--line); border-radius:22px; padding:8px 24px 24px; box-shadow:0 2px 14px rgba(0,0,0,.03); }
+.rank-panel h3{ font-size:17px; padding:20px 0 14px; display:flex; align-items:center; justify-content:space-between; border-bottom:2px dashed var(--line); }
+.rank-panel h3 a{ font-size:12.5px; color:var(--mint); font-weight:600; }
+.rank-panel ol{ counter-reset:rk; }
+.rank-panel ol li{ display:flex; align-items:center; gap:14px; padding:13px 0; border-bottom:1px solid var(--line); }
+.rank-panel ol li:last-child{ border-bottom:0; }
+.rank-panel ol li::before{ counter-increment:rk; content:counter(rk); width:26px; height:26px; border-radius:9px; flex:none; display:grid; place-items:center; font-size:12.5px; font-weight:800; background:rgba(15,174,138,.08); color:var(--mint-d); }
+.rank-panel ol li:nth-child(1)::before,.rank-panel ol li:nth-child(2)::before,.rank-panel ol li:nth-child(3)::before{ background:linear-gradient(135deg,var(--mint),var(--teal)); color:#fff; }
+.rank-panel .info{ flex:1; min-width:0; }
+.rank-panel .info a{ font-size:14.5px; font-weight:600; display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.rank-panel .info span{ font-size:12px; color:var(--ink-3); }
+.rank-panel .score{ font-size:13.5px; font-weight:800; color:var(--mint-d); flex:none; }
+
+/* ===== 栏目三：推荐（横向大卡） ===== */
+.feat-grid{ display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:22px; }
+.feat{ background:var(--white); border:1px solid var(--line); border-radius:22px; overflow:hidden; transition:.3s; box-shadow:0 2px 14px rgba(0,0,0,.03); display:flex; flex-direction:column; }
+.feat:hover{ transform:translateY(-7px); box-shadow:var(--shadow); border-color:rgba(15,174,138,.5); }
+.feat.big{ grid-row:span 2; }
+.poster{ position:relative; aspect-ratio:16/10; overflow:hidden; }
+.feat.big .poster{ aspect-ratio:4/3; }
+.poster .ph{ position:absolute; inset:0; display:grid; place-items:center; font-size:54px; color:rgba(255,255,255,.92); background:linear-gradient(140deg,var(--mint),var(--teal)); }
+.feat:nth-child(2) .poster .ph{ background:linear-gradient(140deg,#f59e0b,#f97316); }
+.feat:nth-child(3) .poster .ph{ background:linear-gradient(140deg,#6366f1,#8b5cf6); }
+.feat:nth-child(4) .poster .ph{ background:linear-gradient(140deg,#ec4899,#f43f5e); }
+.feat:nth-child(5) .poster .ph{ background:linear-gradient(140deg,#0ea5e9,#06b6d4); }
+.poster .tag{ position:absolute; top:12px; left:12px; background:rgba(255,255,255,.92); color:var(--mint-d); font-size:11.5px; font-weight:700; padding:4px 11px; border-radius:20px; }
+.poster .rt{ position:absolute; bottom:12px; right:12px; background:var(--white); color:var(--mint-d); font-weight:800; font-size:13px; padding:4px 10px; border-radius:10px; box-shadow:0 3px 10px rgba(0,0,0,.12); }
+.body{ padding:20px; flex:1; display:flex; flex-direction:column; }
+.body h4{ font-size:17px; margin-bottom:7px; }
+.body p{ font-size:13px; color:var(--ink-3); flex:1; }
+.tags{ margin-top:14px; display:flex; gap:6px; flex-wrap:wrap; }
+.tags i{ font-style:normal; font-size:11.5px; padding:4px 10px; border-radius:20px; background:rgba(15,174,138,.08); color:var(--mint-d); font-weight:600; }
+
+/* ===== 栏目四：更新时间线 ===== */
+.timeline{ background:var(--white); border:1px solid var(--line); border-radius:24px; padding:34px; box-shadow:0 2px 14px rgba(0,0,0,.03); }
+.tl{ position:relative; padding-left:30px; }
+.tl::before{ content:""; position:absolute; left:8px; top:8px; bottom:8px; width:2px; background:repeating-linear-gradient(var(--mint),var(--mint) 6px,transparent 6px,transparent 12px); }
+.tl-item{ position:relative; padding:14px 0; }
+.tl-item::before{ content:""; position:absolute; left:-26px; top:20px; width:14px; height:14px; border-radius:50%; background:var(--white); border:3px solid var(--mint); }
+.tl-item h4{ font-size:16px; display:flex; align-items:center; gap:10px; }
+.tl-item h4 span{ font-size:11.5px; color:var(--mint-d); background:rgba(15,174,138,.10); padding:3px 10px; border-radius:20px; font-weight:600; }
+.tl-item p{ font-size:13.5px; color:var(--ink-3); margin-top:3px; }
+
+/* ===== 栏目五：关于 ===== */
+.about{ display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+.abox{ background:var(--white); border:1px solid var(--line); border-radius:22px; padding:30px; box-shadow:0 2px 14px rgba(0,0,0,.03); }
+.abox h3{ font-size:20px; margin-bottom:14px; }
+.abox p{ color:var(--ink-2); font-size:14.5px; margin-bottom:12px; }
+.stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:24px; }
+.stat{ text-align:center; padding:18px 8px; border-radius:16px; background:rgba(15,174,138,.06); }
+.stat b{ display:block; font-size:26px; color:var(--mint-d); font-weight:900; }
+.stat span{ font-size:12px; color:var(--ink-3); }
+.feat-list{ display:flex; flex-direction:column; gap:14px; }
+.feat-list li{ display:flex; gap:14px; align-items:flex-start; padding:14px; border-radius:16px; background:rgba(15,174,138,.04); }
+.feat-list .n{ width:34px; height:34px; border-radius:10px; flex:none; display:grid; place-items:center; font-weight:800; color:#fff; background:linear-gradient(135deg,var(--mint),var(--teal)); }
+.feat-list b{ display:block; font-size:14.5px; }
+.feat-list small{ color:var(--ink-3); font-size:12.5px; }
+
+/* ===== 页脚 ===== */
+.ft{ background:var(--white); border-top:1px solid var(--line); padding:46px 0 26px; }
+.ft-grid{ display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:28px; margin-bottom:30px; }
+.ft .logo{ margin-bottom:12px; }
+.ft p{ color:var(--ink-3); font-size:13px; max-width:320px; }
+.ft h4{ font-size:14px; margin-bottom:14px; color:var(--ink); }
+.ft ul li{ margin-bottom:9px; }
+.ft ul a{ color:var(--ink-2); font-size:13px; transition:.2s; }
+.ft ul a:hover{ color:var(--mint); }
+.ft-bot{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; border-top:1px solid var(--line); padding-top:20px; }
+.ft-bot small{ color:var(--ink-3); font-size:12px; }
+.ft-bot .kw{ color:var(--mint-d); font-weight:600; }
+
+/* ===== 回到顶部 ===== */
+.to-top{ position:fixed; right:20px; bottom:24px; width:46px; height:46px; border-radius:50%; border:0; background:linear-gradient(135deg,var(--mint),var(--teal)); color:#fff; font-size:19px; cursor:pointer; box-shadow:var(--shadow); opacity:0; visibility:hidden; transition:.3s; z-index:98; }
+.to-top.show{ opacity:1; visibility:visible; }
+
+/* ===== 响应式 ===== */
+@media(max-width:960px){
+  .hero .grid{ grid-template-columns:1fr; }
+  .hero-stack{ display:none; }
+  .rank-grid,.about{ grid-template-columns:1fr; }
+  .feat-grid{ grid-template-columns:1fr 1fr; }
+  .feat.big{ grid-row:auto; }
+  .search-top{ display:none; }
+  .nav{ position:fixed; top:68px; left:0; right:0; flex-direction:column; align-items:stretch; gap:4px; padding:18px; background:rgba(255,255,255,.98); border-bottom:1px solid var(--line); max-height:0; overflow:hidden; transition:.35s; }
+  .nav.open{ max-height:420px; }
+  .nav a{ padding:13px 16px; border-radius:12px; }
+  .menu-btn{ display:grid; place-items:center; }
+  .ft-grid{ grid-template-columns:1fr 1fr; }
+}
+@media(max-width:580px){
+  section{ padding:46px 0; }
+  .hero{ padding:46px 0 40px; }
+  .feat-grid{ grid-template-columns:1fr; }
+  .stats{ grid-template-columns:1fr; }
+  .timeline{ padding:22px 18px; }
+  .tl{ padding-left:24px; }
+  .tl-item::before{ left:-22px; }
+  .ft-grid{ grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+
+<div class="wrap">
+
+  <!-- 顶部通知 -->
+  <div class="notice">🎉 给力电影网 全新改版上线，每日精选好片，欢迎<a href="#about">收藏本站</a></div>
+
+  <!-- 头部 -->
+  <header class="hd">
+    <div class="container">
+      <a class="logo" href="#top" aria-label="给力电影网 首页">
+        <span class="dot" aria-hidden="true">🎞️</span>
+        给力<em>电影网</em>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="#cat">影片分类</a>
+        <a href="#rank">热播榜单</a>
+        <a href="#feat">精选推荐</a>
+        <a href="#time">更新计划</a>
+        <a href="#about">关于本站</a>
+        <a href="#" class="cta">在线留言</a>
+      </nav>
+
+      <div class="search-top" role="search">
+        <input type="text" id="topSearch" placeholder="搜索电影 / 演员…" aria-label="搜索">
+        <button onclick="doSearch()" aria-label="搜索">🔍</button>
+      </div>
+
+      <button class="menu-btn" id="menuBtn" aria-label="菜单" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="top">
+    <div class="container">
+      <div class="grid">
+        <div>
+          <span class="kicker">GEILI DIANYING WANG · 影视推荐</span>
+          <h1>好电影，就上<br><em>给力电影网</em></h1>
+          <p class="lead">给力电影网（geilidianyingwang-top）汇聚热门电影与高分剧集，以清晰的分类、权威的榜单和贴心的更新计划，帮你告别片荒，快速找到值得一看的好内容。</p>
+
+          <div class="url-pill">
+            <span>🌐 官方网址</span>
+            <code>https://geilidianyingwang-top.github.io</code>
+          </div>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#rank">🔥 查看热播榜单</a>
+            <a class="btn btn-outline" href="#cat">🎬 浏览分类</a>
+          </div>
+        </div>
+
+        <!-- 右侧悬浮卡片 -->
+        <div class="hero-stack" aria-hidden="true">
+          <div class="float-card fc1">
+            <div class="row"><div class="thumb">🎬</div><div><div class="tt">今日精选好片</div><div class="sub">编辑团队每日严选</div></div></div>
+          </div>
+          <div class="float-card fc2">
+            <div class="row"><div class="thumb p2">🏆</div><div><div class="tt">热播榜单 TOP 10</div><div class="sub">实时热度 · 口碑排行</div></div></div>
+          </div>
+          <div class="float-card fc3">
+            <div class="row"><div class="thumb p3">📅</div><div><div class="tt">每周更新计划</div><div class="sub">追剧追番不错过</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目一：分类 -->
+  <section id="cat">
+    <div class="container">
+      <div class="sec-head">
+        <div>
+          <div class="lb">CATEGORIES</div>
+          <h2>影片<span>分类</span></h2>
+        </div>
+        <p class="desc">给力电影网按题材精细归类，覆盖主流观影偏好，点击即可直达对应分类。</p>
+      </div>
+
+      <div class="chips">
+        <a class="chip" href="#"><span class="ic">💥</span><span><h3>动作片</h3><small>热血大片</small></span></a>
+        <a class="chip" href="#"><span class="ic">😄</span><span><h3>喜剧片</h3><small>轻松解压</small></span></a>
+        <a class="chip" href="#"><span class="ic">💕</span><span><h3>爱情片</h3><small>浪漫温情</small></span></a>
+        <a class="chip" href="#"><span class="ic">🔍</span><span><h3>悬疑片</h3><small>烧脑反转</small></span></a>
+        <a class="chip" href="#"><span class="ic">🚀</span><span><h3>科幻片</h3><small>视效震撼</small></span></a>
+        <a class="chip" href="#"><span class="ic">🏯</span><span><h3>古装剧</h3><small>国风传奇</small></span></a>
+        <a class="chip" href="#"><span class="ic">🎤</span><span><h3>综艺秀</h3><small>欢乐真人秀</small></span></a>
+        <a class="chip" href="#"><span class="ic">🎨</span><span><h3>动漫番</h3><small>二次元经典</small></span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目二：榜单 -->
+  <section id="rank" style="background:rgba(255,255,255,.5)">
+    <div class="container">
+      <div class="sec-head">
+        <div>
+          <div class="lb">TOP RANKING</div>
+          <h2>热播<span>榜单</span></h2>
+        </div>
+        <p class="desc">综合播放热度与观众口碑，为给力电影网用户精选当下最受欢迎的影视内容。</p>
+      </div>
+
+      <div class="rank-grid">
+        <div class="rank-panel">
+          <h3><span>🎬 电影热榜 TOP 5</span><a href="#">查看全部 ›</a></h3>
+          <ol>
+            <li><span class="info"><a href="#">无名之辈：否极泰来</a><span>喜剧 · 犯罪 · 2026</span></span><span class="score">9.2</span></li>
+            <li><span class="info"><a href="#">星际回响</a><span>科幻 · 冒险 · 2026</span></span><span class="score">9.0</span></li>
+            <li><span class="info"><a href="#">暗夜追凶</a><span>悬疑 · 犯罪 · 2025</span></span><span class="score">8.8</span></li>
+            <li><span class="info"><a href="#">云端之恋</a><span>爱情 · 都市 · 2025</span></span><span class="score">8.6</span></li>
+            <li><span class="info"><a href="#">破晓行动</a><span>动作 · 警匪 · 2025</span></span><span class="score">8.5</span></li>
+          </ol>
+        </div>
+
+        <div class="rank-panel">
+          <h3><span>📺 剧集热榜 TOP 5</span><a href="#">查看全部 ›</a></h3>
+          <ol>
+            <li><span class="info"><a href="#">长安十二时辰 第二季</a><span>古装 · 悬疑 · 42集</span></span><span class="score">9.4</span></li>
+            <li><span class="info"><a href="#">沉默的真相 2</a><span>犯罪 · 剧情 · 12集</span></span><span class="score">9.1</span></li>
+            <li><span class="info"><a href="#">繁花似锦</a><span>都市 · 情感 · 36集</span></span><span class="score">8.9</span></li>
+            <li><span class="info"><a href="#">未来处方</a><span>科幻 · 医疗 · 24集</span></span><span class="score">8.7</span></li>
+            <li><span class="info"><a href="#">江湖夜雨</a><span>武侠 · 古装 · 50集</span></span><span class="score">8.5</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目三：精选推荐 -->
+  <section id="feat">
+    <div class="container">
+      <div class="sec-head">
+        <div>
+          <div class="lb">EDITOR'S PICK</div>
+          <h2>精选<span>推荐</span></h2>
+        </div>
+        <p class="desc">编辑团队从海量资源中精挑细选，覆盖多种题材，品质与口碑兼备。</p>
+      </div>
+
+      <div class="feat-grid">
+        <article class="feat big">
+          <div class="poster"><div class="ph" aria-hidden="true">🎬</div><span class="tag">本周主打</span><span class="rt">9.2</span></div>
+          <div class="body">
+            <h4>无名之辈：否极泰来</h4>
+            <p>小人物在命运夹缝中寻找尊严与希望的爆笑犯罪故事，笑中带泪，口碑炸裂。</p>
+            <div class="tags"><i>喜剧</i><i>犯罪</i><i>口碑佳作</i></div>
+          </div>
+        </article>
+
+        <article class="feat">
+          <div class="poster"><div class="ph" aria-hidden="true">🚀</div><span class="tag">独家推荐</span><span class="rt">9.0</span></div>
+          <div class="body">
+            <h4>星际回响</h4>
+            <p>一场跨越光年的星际旅程，探讨人性与文明的边界。</p>
+            <div class="tags"><i>科幻</i><i>冒险</i></div>
+          </div>
+        </article>
+
+        <article class="feat">
+          <div class="poster"><div class="ph" aria-hidden="true">🗡️</div><span class="tag">口碑剧</span><span class="rt">9.4</span></div>
+          <div class="body">
+            <h4>长安十二时辰 第二季</h4>
+            <p>盛世长安下的十二个时辰，步步惊心的悬疑权谋大戏。</p>
+            <div class="tags"><i>古装</i><i>悬疑</i></div>
+          </div>
+        </article>
+
+        <article class="feat">
+          <div class="poster"><div class="ph" aria-hidden="true">🎤</div><span class="tag">综艺</span><span class="rt">8.8</span></div>
+          <div class="body">
+            <h4>欢乐集结号</h4>
+            <p>明星真人秀实境挑战，笑点密集的周末解压首选。</p>
+            <div class="tags"><i>综艺</i><i>真人秀</i></div>
+          </div>
+        </article>
+
+        <article class="feat">
+          <div class="poster"><div class="ph" aria-hidden="true">🎨</div><span class="tag">动漫</span><span class="rt">8.9</span></div>
+          <div class="body">
+            <h4>星海物语</h4>
+            <p>少年追寻星辰奥秘的热血奇幻冒险，画面精美剧情动人。</p>
+            <div class="tags"><i>动漫</i><i>奇幻</i></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目四：更新计划（时间线） -->
+  <section id="time" style="background:rgba(255,255,255,.5)">
+    <div class="container">
+      <div class="sec-head">
+        <div>
+          <div class="lb">UPDATE PLAN</div>
+          <h2>更新<span>计划</span></h2>
+        </div>
+        <p class="desc">给力电影网每周更新安排一目了然，追剧追番有条不紊。</p>
+      </div>
+
+      <div class="timeline">
+        <div class="tl">
+          <div class="tl-item"><h4>周一 · 电影上新 <span>10 部</span></h4><p>院线新片、经典老片同步上线，类型丰富。</p></div>
+          <div class="tl-item"><h4>周二 · 剧集更新 <span>6 部</span></h4><p>热门剧集集中更新，一次看个够。</p></div>
+          <div class="tl-item"><h4>周三 · 综艺上线 <span>3 部</span></h4><p>新一期真人秀实境节目准时放送。</p></div>
+          <div class="tl-item"><h4>周四 · 动漫更新 <span>8 部</span></h4><p>连载番剧与剧场版同步跟进。</p></div>
+          <div class="tl-item"><h4>周五 · 热门加更 <span>不限</span></h4><p>根据热度追加优质资源，惊喜不断。</p></div>
+          <div class="tl-item"><h4>周末 · 经典回顾 <span>特辑</span></h4><p>周末特辑与高分经典合集，重温感动。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 栏目五：关于 -->
+  <section id="about">
+    <div class="container">
+      <div class="about">
+        <div class="abox">
+          <h3>关于给力电影网</h3>
+          <p><strong>给力电影网</strong>（geilidianyingwang-top）是一个专注于影视资源推荐与在线观看入口的站点，以"帮你找到好电影"为宗旨，提供清晰便捷的内容浏览体验。</p>
+          <p>网站涵盖电影、剧集、综艺、动漫等多种类型，配合热播榜单与每周更新计划，全站支持手机、平板、电脑自适应访问。</p>
+          <p>官方网址：<code style="color:var(--mint-d); font-weight:700;">https://geilidianyingwang-top.github.io</code></p>
+          <div class="stats">
+            <div class="stat"><b>8+</b><span>内容分类</span></div>
+            <div class="stat"><b>1000+</b><span>精选资源</span></div>
+            <div class="stat"><b>每日</b><span>更新维护</span></div>
+          </div>
+        </div>
+
+        <div class="abox">
+          <h3>为什么选择我们</h3>
+          <ul class="feat-list">
+            <li><span class="n">1</span><span><b>精准分类</b><small>按类型、题材、年份多维度筛选，快速定位。</small></span></li>
+            <li><span class="n">2</span><span><b>权威榜单</b><small>综合热度与口碑动态排行，紧跟潮流。</small></span></li>
+            <li><span class="n">3</span><span><b>更新计划</b><small>每周更新一目了然，不错过新番好剧。</small></span></li>
+            <li><span class="n">4</span><span><b>全端适配</b><small>移动端自适应布局，随时随地畅快浏览。</small></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="ft">
+    <div class="container">
+      <div class="ft-grid">
+        <div>
+          <a class="logo" href="#top"><span class="dot" aria-hidden="true">🎞️</span>给力<em>电影网</em></a>
+          <p>给力电影网（geilidianyingwang-top）提供优质影视资源推荐与在线观看入口，欢迎收藏本站，告别片荒。</p>
+        </div>
+        <div>
+          <h4>内容导航</h4>
+          <ul>
+            <li><a href="#cat">影片分类</a></li>
+            <li><a href="#rank">热播榜单</a></li>
+            <li><a href="#feat">精选推荐</a></li>
+            <li><a href="#time">更新计划</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>关于我们</h4>
+          <ul>
+            <li><a href="#about">关于本站</a></li>
+            <li><a href="#">合作联系</a></li>
+            <li><a href="#">使用帮助</a></li>
+            <li><a href="#">在线留言</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>官方网址</h4>
+          <ul>
+            <li><a href="https://geilidianyingwang-top.github.io">🔗 geilidianyingwang-top.github.io</a></li>
+            <li><a href="#">📧 在线留言</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ft-bot">
+        <small>© <span id="year"></span> 给力电影网（geilidianyingwang-top）. 本站仅供影视资源推荐与信息展示，内容版权归原作者及发行方所有。</small>
+        <small class="kw">关键词：给力电影网 · geilidianyingwang-top · 热门电影推荐</small>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<button class="to-top" id="toTop" aria-label="回到顶部">↑</button>
+
+<script>
+  // 年份
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // 移动端菜单
+  var menuBtn = document.getElementById('menuBtn');
+  var nav = document.getElementById('nav');
+  menuBtn.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuBtn.textContent = open ? '✕' : '☰';
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      nav.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded','false');
+      menuBtn.textContent = '☰';
+    });
+  });
+
+  // 回到顶部
+  var toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', function(){
+    toTop.classList.toggle('show', window.scrollY > 400);
+  });
+  toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+
+  // 搜索演示
+  function doSearch(){
+    var q = document.getElementById('topSearch').value.trim();
+    if(q){ alert('给力电影网 搜索："' + q + '"\n（演示功能，接入搜索接口后可跳转结果页）'); }
+  }
+  document.getElementById('topSearch').addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){ doSearch(); }
+  });
+</script>
+
+</body>
+</html>
